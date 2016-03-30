@@ -8,13 +8,9 @@ var userSchema = new schema ({
 	name: {type: String,required:true},
 	branch: {type: String,required:true},
 
-	appliedFor: [{id:{
-		type:String
-	}}],
+	appliedFor: [String],
 
-	placedIn: [{id:{
-		type:String
-	}}],
+	placedIn: [String],
 
 	roles: [String]
 });
