@@ -7,7 +7,11 @@ module.exports = function(){
       /*
        * Create an username check
        */
-      User.findOne({ 'username': username, 'password': password }).exec(function (err, user) {
+
+       console.log(username);
+      User.findOne({ 'username': parseInt(username), 'password': password }).exec(function (err, user) {
+
+         console.log('err');
           if (err)
               return done(err);
           if (user)
@@ -19,6 +23,7 @@ module.exports = function(){
 
   passport.serializeUser(function (user, done) {
     if(user){
+
        done(null, user._id);
     }
    });

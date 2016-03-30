@@ -3,7 +3,9 @@ var User = require('../../models/users');
 var localAuth = require('./localAuth')();
 
 exports.loginAuthenticate = function(req, res, next) {
+  
   var auth = passport.authenticate('local-login', function(err, user, info){
+    console.log(user);
       if(err){
         return next(err);
       }
@@ -28,6 +30,7 @@ exports.loginAuthenticate = function(req, res, next) {
 }
 
 exports.alreadyLoggedIn = function(req, res, next){
+  console.log(req.body);
   if(req.isAuthenticated()){
       res.json({
         "message":"You are already logged in.",
@@ -38,6 +41,7 @@ exports.alreadyLoggedIn = function(req, res, next){
       next();
   }
 }
+
 
 exports.logout = function(req, res, next){
   if(req.isAuthenticated()){
