@@ -10,12 +10,13 @@ var userSchema = new schema ({
 
 	appliedFor: [{id:{
 		type:String
-	}}]
+	}}],
 
-	placedIn: {type: Array,'default':[]}
-	
+	placedIn: [{id:{
+		type:String
+	}}],
 
-
+	roles: [String]
 });
 
 var userModel = mongoose.model('users', userSchema);
