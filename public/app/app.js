@@ -1,4 +1,4 @@
-var app = angular.module('tnp',['ngResource', 'ngRoute', 'ngCookies']);
+var app = angular.module('tnp',['ngResource', 'ngRoute', 'ngCookies', 'ngMaterial']);
 
 app.run(function ($rootScope, $location) {
     $rootScope.$on('$routeChangeError', function (evt, current, previous, rejection) {
@@ -52,6 +52,11 @@ app.config(function($routeProvider, $locationProvider){
       templateUrl: 'partials/users',
       controller: 'usersCtrl',
       resolve: routeCheck.admin
+    })
+    .when('/register',{
+      templateUrl: 'partials/register',
+      controller: 'authCtrl',
+      resolve: routeCheck.noUser
     })
     .otherwise({redirectTo: '/'})
 });

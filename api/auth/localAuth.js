@@ -4,9 +4,6 @@ var User = require('../../models/users');
 
 module.exports = function(){
   passport.use('local-login', new LocalStrategy(function(username, password, done) {
-      /*
-       * Create an username check
-       */
       User.findOne({ 'username': username, 'password': password }).exec(function (err, user) {
           if (err)
               return done(err);
@@ -14,6 +11,27 @@ module.exports = function(){
               return done(null, user);
           else
               return done(null, false);
+      });
+  }));
+
+  passport.use('local-signup', new LocalStrategy({ passReqToCallback: true },function(req, username, password, done) {
+      User.findOne({ 'username': username }).exec(function (err, user) {
+          if (err)
+              return done(err);
+          if (user)
+              return done(null, false);
+          else {
+            var input = req.body;
+            var newUser = new User(input);
+            newUser.roles = ["user"];
+            newUser.save(function (err) {
+                        if (err) {
+                            throw err;
+                        }
+                        console.log(newUser);
+                        return done(null, newUser);
+                    });
+          }
       });
   }));
 

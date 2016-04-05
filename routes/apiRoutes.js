@@ -6,6 +6,7 @@ var company = require('../api/companyCtrl');
 var roles = require('../api/auth/roles');
 
 router.post('/login', auth.alreadyLoggedIn, auth.loginAuthenticate);
+router.post('/register', auth.alreadyLoggedIn, auth.signupAuthenticate);     
 router.post('/logout', auth.logout);
 router.get('/appliedFor', auth.isLoggedIn, user.appliedFor);
 router.get('/placedIn', auth.isLoggedIn, user.placedIn);
